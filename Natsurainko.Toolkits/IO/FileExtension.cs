@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
-using System.Text;
 
 namespace Natsurainko.Toolkits.IO
 {
@@ -16,11 +14,18 @@ namespace Natsurainko.Toolkits.IO
             if (!file.Exists)
                 return false;
 
-            using var fileStream = File.OpenRead(file.FullName);
-            using var provider = new SHA1CryptoServiceProvider();
-            byte[] bytes = provider.ComputeHash(fileStream);
+            try
+            {
+                using var fileStream = File.OpenRead(file.FullName);
+                using var provider = new SHA1CryptoServiceProvider();
+                byte[] bytes = provider.ComputeHash(fileStream);
 
-            return sha1.ToLower() == BitConverter.ToString(bytes).Replace("-", "").ToLower();
+                return sha1.ToLower() == BitConverter.ToString(bytes).Replace("-", "").ToLower();
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

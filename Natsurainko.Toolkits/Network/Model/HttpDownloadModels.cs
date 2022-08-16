@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json;
 using System.IO;
 using System.Net;
-using System.Text;
 
 namespace Natsurainko.Toolkits.Network.Model
 {
@@ -14,6 +12,7 @@ namespace Natsurainko.Toolkits.Network.Model
         /// <summary>
         /// 下载文件存放目录
         /// </summary>
+        [JsonIgnore]
         public DirectoryInfo Directory { get; set; }
 
         /// <summary>
@@ -56,6 +55,7 @@ namespace Natsurainko.Toolkits.Network.Model
         /// <summary>
         /// 下载实际文件
         /// </summary>
+        [JsonIgnore]
         public FileInfo FileInfo { get; set; }
     }
 }
