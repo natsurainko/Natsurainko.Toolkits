@@ -9,6 +9,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
+using Path = System.IO.Path;
+using Stream = System.IO.Stream;
 
 namespace Natsurainko.Toolkits.Network
 {
@@ -140,7 +142,7 @@ namespace Natsurainko.Toolkits.Network
                 if (!Directory.Exists(folder))
                     Directory.CreateDirectory(folder);
 
-                using var fileStream = new FileStream(fileInfo.FullName, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
+                using var fileStream = File.Create(fileInfo.FullName);
                 using var stream = await responseMessage.Content.ReadAsStreamAsync();
 
                 byte[] bytes = new byte[BufferSize];
@@ -209,7 +211,7 @@ namespace Natsurainko.Toolkits.Network
                 if (!Directory.Exists(folder))
                     Directory.CreateDirectory(folder);
 
-                using var fileStream = new FileStream(fileInfo.FullName, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
+                using var fileStream = File.Create(fileInfo.FullName);
                 using var stream = await responseMessage.Content.ReadAsStreamAsync();
 
                 timer.Elapsed += delegate { progressChangedAction.Invoke(fileStream.Length / (float)responseMessage.Content.Headers.ContentLength, $"{fileStream.Length.LengthToMb()} / {((long)responseMessage.Content.Headers.ContentLength).LengthToMb()}"); };

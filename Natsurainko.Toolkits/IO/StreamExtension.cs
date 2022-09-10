@@ -46,6 +46,5 @@ namespace Natsurainko.Toolkits.IO
             stream.Write(bytes, 0, bytes.Length);
             stream.Flush();
         }
-
     }
 }
