@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Nullable>disable</Nullable>
 	<LangVersion>preview</LangVersion>
-	<Version>1.0.2</Version>
+	<Version>1.0.3</Version>
 	<Authors>Natsurainko</Authors>
 	<Description>Natsurainko 的开发工具箱</Description>
 	<PackageProjectUrl>https://github.com/natsurainko/Natsurainko.Toolkits</PackageProjectUrl>

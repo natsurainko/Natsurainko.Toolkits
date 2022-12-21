@@ -2,30 +2,29 @@
 using System.IO;
 using System.Security.Cryptography;
 
-namespace Natsurainko.Toolkits.IO
+namespace Natsurainko.Toolkits.IO;
+
+public static class FileExtension
 {
-    public static class FileExtension
+    public static bool Verify(this FileInfo file, int size)
+        => file.Exists && file.Length == size;
+
+    public static bool Verify(this FileInfo file, string sha1)
     {
-        public static bool Verify(this FileInfo file, int size)
-            => file.Exists ? file.Length == size : false;
+        if (!file.Exists)
+            return false;
 
-        public static bool Verify(this FileInfo file, string sha1)
+        try
         {
-            if (!file.Exists)
-                return false;
+            using var fileStream = File.OpenRead(file.FullName);
+            using var provider = new SHA1CryptoServiceProvider();
+            byte[] bytes = provider.ComputeHash(fileStream);
 
-            try
-            {
-                using var fileStream = File.OpenRead(file.FullName);
-                using var provider = new SHA1CryptoServiceProvider();
-                byte[] bytes = provider.ComputeHash(fileStream);
-
-                return sha1.ToLower() == BitConverter.ToString(bytes).Replace("-", "").ToLower();
-            }
-            catch
-            {
-                return false;
-            }
+            return sha1.ToLower() == BitConverter.ToString(bytes).Replace("-", "").ToLower();
+        }
+        catch
+        {
+            return false;
         }
     }
 }
