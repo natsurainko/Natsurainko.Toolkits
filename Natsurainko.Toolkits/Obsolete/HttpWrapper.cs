@@ -121,7 +121,7 @@ public partial class HttpWrapper
             using var fileStream = File.Create(fileInfo.FullName);
             using var stream = await responseMessage.Content.ReadAsStreamAsync();
 
-            timer.Elapsed += delegate { progressChangedAction.Invoke(fileStream.Length / (float)responseMessage.Content.Headers.ContentLength, $"{fileStream.Length.LengthToMb()} / {((long)responseMessage.Content.Headers.ContentLength).LengthToMb()}"); };
+            timer.Elapsed += delegate { progressChangedAction.Invoke(fileStream.Length / (float)responseMessage.Content.Headers.ContentLength, $"{fileStream.Length.FormatSize()} / {((long)responseMessage.Content.Headers.ContentLength).FormatSize()}"); };
             timer.Start();
 
             byte[] bytes = new byte[BufferSize];
