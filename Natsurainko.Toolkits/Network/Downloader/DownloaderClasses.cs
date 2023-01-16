@@ -62,16 +62,16 @@ public class ParallelDownloaderProgressChangedEventArgs : IDownloaderProgressCha
 {
     public double Progress => CompletedTasks / (double)TotleTasks;
 
-    public long TotleTasks { get; set; }
+    public int TotleTasks { get; set; }
 
-    public long CompletedTasks { get; set; }
+    public int CompletedTasks { get; set; }
 }
 
 public class ParallelDownloaderResponse : DownloadResponse
 {
-    public long TotleTasks { get; set; }
+    public int TotleTasks { get; set; }
 
-    public long CompletedTasks { get; set; }
+    public int CompletedTasks { get; set; }
 
     public List<DownloadRequest> FailedRequests { get; set; }
 }
