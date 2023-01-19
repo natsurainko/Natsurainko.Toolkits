@@ -80,18 +80,16 @@ public class FragmentDownloader
                 });
             }));
 
-            var downloaderResponses = await Task.WhenAll(downloaders.Select(async x =>
-            {
-                x.BeginDownload();
-                var res = await x.CompleteAsync();
-                x.Dispose();
+            downloaders.ForEach(x => x.BeginDownload());
+            var downloaderResponses = await Task.WhenAll(downloaders.Select(async x => await x.CompleteAsync()));
 
-                return res;
-            }));
+            foreach (var item in downloaders)
+                item.Dispose();
 
             using var fileStream = File.Create(Path.Combine(DownloadFolder, TargetFileName));
 
             foreach (var item in downloaderResponses)
+            {
                 if (item.Success)
                 {
                     var buffer = File.ReadAllBytes(item.Result.FullName);
@@ -99,6 +97,7 @@ public class FragmentDownloader
 
                     File.Delete(item.Result.FullName);
                 }
+            }
 
             await fileStream.FlushAsync();
 
