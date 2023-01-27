@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -9,7 +8,7 @@ namespace Natsurainko.Toolkits.Values;
 public static class ObservableExtension
 {
     public static void Sort<T, TKey>(
-        this ObservableCollection<T> collection, 
+        this ObservableCollection<T> collection,
         Func<T, TKey> keySelector,
         IComparer<TKey> comparer,
         bool descending = true)
