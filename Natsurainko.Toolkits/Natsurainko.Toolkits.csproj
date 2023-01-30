@@ -4,11 +4,11 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Nullable>disable</Nullable>
 	<LangVersion>preview</LangVersion>
-	<Version>1.0.3</Version>
+	<Version>1.0.4</Version>
 	<Authors>Natsurainko</Authors>
 	<Description>Natsurainko 的开发工具箱</Description>
 	<PackageProjectUrl>https://github.com/natsurainko/Natsurainko.Toolkits</PackageProjectUrl>
-	<Copyright>Copyright © Natsurainko 2022</Copyright>
+	<Copyright>Copyright © Natsurainko 2022-2023</Copyright>
 	<RepositoryUrl>https://github.com/natsurainko/Natsurainko.Toolkits</RepositoryUrl>
 	<PackageTags>Natsurainko.Toolkits</PackageTags>
   </PropertyGroup>
